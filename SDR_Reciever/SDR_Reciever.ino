@@ -228,12 +228,12 @@ void SendFrequency()
   EvenDivisor();
 
   si5351.set_freq_manual(clk_1_frequency * SI5351_FREQ_MULT, Even_Divisor * clk_1_frequency * SI5351_FREQ_MULT, SI5351_CLK0);
-  si5351.set_freq_manual(clk_1_frequency * SI5351_FREQ_MULT, Even_Divisor * clk_1_frequency * SI5351_FREQ_MULT, SI5351_CLK2);
+  si5351.set_freq_manual(clk_1_frequency * SI5351_FREQ_MULT, Even_Divisor * clk_1_frequency * SI5351_FREQ_MULT, SI5351_CLK1);
   
   
   si5351.set_phase(SI5351_CLK0, 0);
   //si5351.set_phase(SI5351_CLK1, 0);  
-  si5351.set_phase(SI5351_CLK2, Even_Divisor);
+  si5351.set_phase(SI5351_CLK1, Even_Divisor);
  
 if(Even_Divisor != oldEven_Divisor)
   {
