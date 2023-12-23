@@ -429,7 +429,7 @@ void analogMeter()
 
   // Draw ticks every 5 degrees from -50 to +50 degrees (100 deg. FSD swing)
   for (int i = -50; i < 51; i += 5) {
-    // Long scale tick length
+    // Long scale tick length   
     int tl = 15;
 
     // Coodinates of tick to draw
