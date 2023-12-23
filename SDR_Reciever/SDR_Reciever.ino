@@ -321,6 +321,8 @@ void setup()
  setupDisplay();
  setupEncoder();
  clk_1_frequency = EEPROM.readLong64(0);
+ if(clk_1_frequency < 7000000 || clk_1_frequency > 7300000)
+  clk_1_frequency = 7000000;
 
  setupSi5351();
   
