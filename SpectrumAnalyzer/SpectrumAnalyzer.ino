@@ -103,25 +103,19 @@ void setup()
   setupEncoder();
   setupSi5351();
  
-  
-  tft.setTextColor(TFT_BLUE,TFT_WHITE );  
-  tft.drawString(" www.RADIOBUILDER.org",5,5,2);
-  tft.drawString(" OSC-1 ",5,30,2);
-
-  updateTFT();
-
   adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_DB_0);
   adc1_config_width(ADC_WIDTH_BIT_12);
   adc1_ulp_enable();
 
 
   tft.fillScreen(TFT_WHITE);
-
   tft.setTextColor(TFT_WHITE,TFT_BLACK );  
   tft.drawString(" 7.000MHz ",45,0,2);
 
-  pinMode(SW_4_PIN, INPUT);
+  pinMode(SW_1_PIN, INPUT);
+  pinMode(SW_2_PIN, INPUT);
   pinMode(SW_3_PIN, INPUT);
+  pinMode(SW_4_PIN, INPUT);
 
   uint64_t bandwidth = stop_frequency - start_frequency;
   float f = ((float)bandwidth)/1000000.0f;
@@ -143,16 +137,22 @@ void loop()
   static bool draw_marker = true;
 
     int sw1 = digitalRead(SW_1_PIN);
-    if(sw1==1)
+    if(sw1==1){
+      Serial.println("SW1 Pressed");
       mode = MODE_GAIN;
+    }
 
     int sw2 = digitalRead(SW_2_PIN);
-    if(sw2==1)
+    if(sw2==1){
+      Serial.println("SW2 Pressed");
       mode =  MODE_BW;
+    }
 
     int sw3 = digitalRead(SW_3_PIN);
-    if(sw3==1)
+    if(sw3==1){
+      Serial.println("SW3 Pressed");
       mode = MODE_MARKER;
+    }
 
     switch(mode){
       case MODE_MARKER :  tft.setTextColor(TFT_BLUE,TFT_WHITE );  
@@ -239,12 +239,6 @@ void loop()
     delay(1);
 
     int value = adc1_get_raw(ADC1_CHANNEL_0);
-
-    Serial.print(000); // To freeze the lower limit
-    Serial.print(" ");
-    Serial.print(4000); // To freeze the upper limit
-    Serial.print(" ");
-    Serial.println(value);
 
     for(int i =13;i<115;i++)
     {
