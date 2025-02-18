@@ -12,12 +12,11 @@
 #include "si5351.h"
 #include "Wire.h"
 #include "AudioTools.h"
-#include "FIRConverter.h"
-#include "MixerConverter.h"
 #include "coeff.h"
 #include <EEPROM.h>
 #include <EasyButton.h>
 #include <TFT_eWidget.h>  
+
 
 TFT_eSPI tft = TFT_eSPI(); 
 #define M_SIZE 0.667
