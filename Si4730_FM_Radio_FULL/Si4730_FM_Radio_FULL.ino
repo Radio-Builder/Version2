@@ -8,10 +8,12 @@ int eeprom_address = 0;
 #define EEPROM_SIZE 8
 
 
+// These are the default frequencies ( Changes these for your area )
 uint16_t Preset1=8910;
 uint16_t Preset2=10580;
 uint16_t Preset3=10390;
 uint16_t Preset4=9620;
+
 
 
 void plotNeedle(int value, byte ms_delay);
@@ -122,8 +124,31 @@ void setup()
    Serial.begin(115200);
    while(!Serial);
 
+  EEPROM.begin(EEPROM_SIZE);
 
-setupSi4735();
+  Preset1 = readEepromInt(0);
+  Preset2 = readEepromInt(2);
+  Preset3 = readEepromInt(4);
+  Preset4 = readEepromInt(6);
+
+  if(Preset1 < 8800 || Preset1 > 108000)
+    Preset1 < 8800;
+  
+  if(Preset2 < 8800 || Preset2 > 108000)
+    Preset2 < 8800;
+
+  if(Preset3 < 8800 || Preset3 > 108000)
+    Preset3 < 8800;
+  
+  if(Preset4 < 8800 || Preset4 > 108000)
+    Preset4 < 8800;
+
+  Serial.println("EEPROM Read 0 " + String((uint16_t)readEepromInt(0)));
+  Serial.println("EEPROM Read 2 " + String((uint16_t)readEepromInt(2)));
+  Serial.println("EEPROM Read 4 " + String((uint16_t)readEepromInt(4)));
+  Serial.println("EEPROM Read 6 " + String((uint16_t)readEepromInt(6)));
+
+  setupSi4735();
 
   setupDisplay();
   setupEncoder();
@@ -148,20 +173,6 @@ setupSi4735();
   plotNeedle((int)value, 0);
 
   tft.drawCentreString("  "+String(currentFrequency)+"  ", M_SIZE*120, M_SIZE*75, 2); // Comment out to avoid font 4
-
-
-  EEPROM.begin(EEPROM_SIZE);
-
-
-  Preset1 = readEepromInt(0);
-  Preset2 = readEepromInt(2);
-  Preset3 = readEepromInt(4);
-  Preset4 = readEepromInt(6);
-
-  Serial.println("EEPROM Read 0 " + String((uint16_t)readEepromInt(0)));
-  Serial.println("EEPROM Read 2 " + String((uint16_t)readEepromInt(2)));
-  Serial.println("EEPROM Read 4 " + String((uint16_t)readEepromInt(4)));
-  Serial.println("EEPROM Read 6 " + String((uint16_t)readEepromInt(6)));
 
 }
 
