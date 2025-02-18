@@ -294,7 +294,7 @@ void loop()
     do{
       delay(100);
     }
-    while(digitalRead(SW_2_PIN)==1);
+    while(digitalRead(SW_3_PIN)==1);
 
     currentFrequency = si4735.getFrequency();
     update = true; 
@@ -308,7 +308,7 @@ void loop()
     do{
       delay(100);
     }
-    while(digitalRead(SW_2_PIN)==1);
+    while(digitalRead(SW_4_PIN)==1);
 
   }
 
